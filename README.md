@@ -10,6 +10,11 @@ GitHub Templates for Pull Request / Issue
 ### Private
 - Issue テンプレート ( `.md` ) を利用してください.
 
+## Usage: Pull Request Template
+
+- 必要に合わせて `pull_request_template.md` を修正して利用してください.
+
+
 ## Ref
 
 - [Creating an issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue)
