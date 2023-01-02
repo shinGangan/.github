@@ -1,12 +1,10 @@
 ---
-name: '🐞 Bug Report'
-description: Bug Report
+name: Bug Report 🐞
+about: Bug Report Template
 title: '【Bug】'
 labels: ''
-assignees: ''
+assignees: 'Shimpei-GANGAN'
 ---
-
-バグレポート
 
 ## どんな不具合が発生しましたか？
 
