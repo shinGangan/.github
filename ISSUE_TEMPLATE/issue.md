@@ -1,9 +1,9 @@
 ---
-name: Default
+name: Default Issue 🙂
 about: Issue Template for Default
 title: '【】'
 labels: ''
-assignees: ''
+assignees: 'Shimpei-GANGAN'
 ---
 
 ## 内容
