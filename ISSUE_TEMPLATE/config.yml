@@ -2,8 +2,8 @@ blank_issues_enabled: false
 # NOTE: url 部分は各リポジトリで任意に変更する. labels 設定は適宜追加する.
 contact_links:
   - name: Issue
-    url: https://github.com/{REPO}/issues/new?template=issue.yml&assignees=@Shimpei-GANGAN
+    url: https://github.com/$REPO/issues/new?template=issue.yml&assignees=@Shimpei-GANGAN
     about: Default issue template
   - name: Bug Report
-    url: https://github.com/{REPO}/issues/new?template=bug_report.yml&assignees=@Shimpei-GANGAN
+    url: https://github.com/$REPO/issues/new?template=bug_report.yml&assignees=@Shimpei-GANGAN
     about: Bug report template
