@@ -1,8 +1,9 @@
 name: 🐞 Bug Report
 description: Bug Report
-title: '【Bug】'
-labels: []
-assignees: ''
+title: "Bug:"
+labels: ["🐞 Bugs"]
+assignees:
+  - shinGangan
 body:
   - type: markdown
     attributes:
