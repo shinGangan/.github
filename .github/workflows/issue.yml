@@ -27,7 +27,7 @@ on:
         required: true
 
 jobs:
-  edit-pr:
+  edit-issue:
     runs-on: ubuntu-22.04
     timeout-minutes: 1
     env:
