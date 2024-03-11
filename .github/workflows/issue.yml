@@ -39,3 +39,9 @@ jobs:
           GH_TOKEN: ${{ secrets.token }}
           GH_REPO: ${{ secrets.repo }}
           MILESTONE: ${{ inputs.milestone }}
+      - name: Assgin PR author
+        run: gh issue edit $NUMBER --add-assignee $ASSIGNEE
+        env:
+          GH_TOKEN: ${{ secrets.token }}
+          GH_REPO: ${{ secrets.repo }}
+          ASSIGNEE: ${{ inputs.assignee }}
