@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-22.04
     timeout-minutes: 1
     env:
-      NUMBER: ${{ inputs.numbner }}
+      NUMBER: ${{ inputs.number }}
     steps:
       - name: Add milestone
         run: gh issue edit $NUMBER -m $MILESTONE
