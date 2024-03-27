@@ -1,0 +1,37 @@
+name: GitHub Projects
+on:
+  workflow_call:
+    inputs:
+      number:
+        description: "PR number"
+        required: true
+        type: string
+      url:
+        description: "URL of the issue or pull request to add to the project"
+        required: true
+        type: string
+      owner:
+        description: "Project Owner. default: @me"
+        required: false
+        type: string
+    secrets:
+      token:
+        description: "Github token"
+        required: true
+      repo:
+        description: "Github repository"
+        required: true
+
+jobs:
+  edit-pr:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 1
+    env:
+      NUMBER: ${{ inputs.number }}
+      OWNER: ${{ inputs.owner }}
+      URL: ${{ inputs.url }}
+    steps:
+      - name: Add Item
+        run: gh project item-add $NUMBER --owner $ASSIGNEE --url $URL
+        env:
+          GH_TOKEN: ${{ secrets.token }}
