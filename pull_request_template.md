@@ -1,11 +1,11 @@
-## Issue
+## 🔗 Issue
 
 closed #X.
 
-## Context
+## 📚 Description
 
 - [ ]
 
-## Reviewer checklist
+## 📝 Reviewer checklist
 
 - [ ]
