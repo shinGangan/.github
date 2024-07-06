@@ -1,0 +1,25 @@
+name: Get dates
+on:
+  workflow_call:
+    outputs:
+      month:
+        description: "Issue number"
+        value: ${{ jobs.get-month.outputs.month }}
+
+jobs:
+  get-month:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 1
+    env:
+      NUMBER: ${{ inputs.number }}
+      GH_TOKEN: ${{ secrets.token }}
+      GH_REPO: ${{ secrets.repo }}
+    outputs:
+      month: ${{ steps.run-date-command.outputs.month }}
+    steps:
+      - name: Get this month's dates
+        id: run-date-command
+        run: |
+          echo "month=`date +'%Y/%m'`" >> $GITHUB_OUTPUT
+        env:
+          TZ: 'Asia/Tokyo'
