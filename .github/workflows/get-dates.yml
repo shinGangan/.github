@@ -3,7 +3,7 @@ on:
   workflow_call:
     outputs:
       month:
-        description: "Issue number"
+        description: "Get this month's dates"
         value: ${{ jobs.get-month.outputs.month }}
 
 jobs:
