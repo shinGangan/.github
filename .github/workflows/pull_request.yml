@@ -6,18 +6,26 @@ on:
         description: "PR number"
         required: true
         type: string
-      assignee:
-        description: "Assign PR author"
-        required: false
-        type: string
       title:
         description: "PR title"
         required: false
         type: string
-      milestone:
-        description: "PR milestone"
+      assignee:
+        description: "Add assigned users"
         required: false
         type: string
+      milestone:
+        description: "Add milestone"
+        required: false
+        type: string
+      labels:
+        description: "Add labels"
+        required: false
+        type: string
+      projects:
+        description: "Add the PR to projects"
+        required: false
+        type: string    
     secrets:
       token:
         description: "Github token"
@@ -27,21 +35,35 @@ on:
         required: true
 
 jobs:
-  edit-pr:
+  pull-request:
     runs-on: ubuntu-22.04
     timeout-minutes: 1
+    strategy:
+      fail-fast: false
+      matrix:
+        id: [0, 1, 2, 3]
     env:
       NUMBER: ${{ inputs.number }}
+      GH_TOKEN: ${{ secrets.token }}
+      GH_REPO: ${{ secrets.repo }}
     steps:
-      - name: Assgin PR author
+      - name: Add assigned users
+        if: ${{ inputs.assignee != 0 }}
         run: gh pr edit $NUMBER --add-assignee $ASSIGNEE
         env:
-          GH_TOKEN: ${{ secrets.token }}
-          GH_REPO: ${{ secrets.repo }}
           ASSIGNEE: ${{ inputs.assignee }}
       - name: Add milestone
+        if: ${{ inputs.milestone != 0 }}
         run: gh pr edit $NUMBER -m $MILESTONE
         env:
-          GH_TOKEN: ${{ secrets.token }}
-          GH_REPO: ${{ secrets.repo }}
           MILESTONE: ${{ inputs.milestone }}
+      - name: Add label
+        if: ${{ inputs.label != 0 }}
+        run: gh pr edit $NUMBER --add-label $LABEL
+        env:
+          LABEL: ${{ inputs.label }}
+      - name: Add the PR to projects
+        if: ${{ inputs.projects != 0 }}
+        run: gh pr edit $NUMBER --add-project $PROJECT
+        env:
+          PROJECT: ${{ inputs.projects }}
