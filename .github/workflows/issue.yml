@@ -6,16 +6,24 @@ on:
         description: "Issue number"
         required: true
         type: number
-      assignee:
-        description: "Assign Issue author"
-        required: false
-        type: string
       title:
         description: "Issue title"
         required: false
         type: string
+      assignee:
+        description: "Add assigned users"
+        required: false
+        type: string
       milestone:
-        description: "milestone"
+        description: "Add milestone"
+        required: false
+        type: string
+      labels:
+        description: "Add labels"
+        required: false
+        type: string
+      projects:
+        description: "Add the issue to projects"
         required: false
         type: string
     secrets:
@@ -24,26 +32,35 @@ on:
         required: true
       repo:
         description: "Github repository"
-        required: false
+        required: true
 
 jobs:
-  edit-issue:
+  issues:
     runs-on: ubuntu-22.04
     timeout-minutes: 1
     env:
       NUMBER: ${{ inputs.number }}
+      GH_TOKEN: ${{ secrets.token }}
+      GH_REPO: ${{ secrets.repo }}
     steps:
+      # ref: https://docs.github.com/ja/actions/learn-github-actions/expressions#operators
+      - name: Add assigned users
+        if: ${{ inputs.assignee != 0 }}
+        run: gh issue edit $NUMBER --add-assignee $ASSIGNEE
+        env:
+          ASSIGNEE: ${{ inputs.assignee }}
       - name: Add milestone
         if: ${{ inputs.milestone != 0 }}
         run: gh issue edit $NUMBER -m $MILESTONE
         env:
-          GH_TOKEN: ${{ secrets.token }}
-          GH_REPO: ${{ secrets.repo }}
           MILESTONE: ${{ inputs.milestone }}
-      - name: Assginees
-        if: ${{ inputs.assignee != 0 }}
-        run: gh issue edit $NUMBER --add-assignee $ASSIGNEE
+      - name: Add label
+        if: ${{ inputs.label != 0 }}
+        run: gh issue edit $NUMBER --add-label $LABEL
         env:
-          GH_TOKEN: ${{ secrets.token }}
-          GH_REPO: ${{ secrets.repo }}
-          ASSIGNEE: ${{ inputs.assignee }}
+          LABEL: ${{ inputs.label }}
+      - name: Add the issue to projects
+        if: ${{ inputs.projects != 0 }}
+        run: gh issue edit $NUMBER --add-project $PROJECT
+        env:
+          PROJECT: ${{ inputs.projects }}
