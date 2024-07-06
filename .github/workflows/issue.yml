@@ -34,12 +34,14 @@ jobs:
       NUMBER: ${{ inputs.number }}
     steps:
       - name: Add milestone
+        if: ${{ inputs.milestone != 0 }}
         run: gh issue edit $NUMBER -m $MILESTONE
         env:
           GH_TOKEN: ${{ secrets.token }}
           GH_REPO: ${{ secrets.repo }}
           MILESTONE: ${{ inputs.milestone }}
-      - name: Assgin PR author
+      - name: Assginees
+        if: ${{ inputs.assignee != 0 }}
         run: gh issue edit $NUMBER --add-assignee $ASSIGNEE
         env:
           GH_TOKEN: ${{ secrets.token }}
