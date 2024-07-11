@@ -38,10 +38,6 @@ jobs:
   issues:
     runs-on: ubuntu-22.04
     timeout-minutes: 1
-    strategy:
-      fail-fast: false
-      matrix:
-        id: [0, 1, 2, 3]
     env:
       NUMBER: ${{ inputs.number }}
       GH_TOKEN: ${{ secrets.token }}
