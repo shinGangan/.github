@@ -1,4 +1,5 @@
 {
+  // ref: https://github.com/shinGangan/renovate-config
   "extends": ["github>shinGangan/renovate-config"],
   "reviewers": ["shinGangan"]
 }
