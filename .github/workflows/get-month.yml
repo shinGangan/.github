@@ -1,25 +1,67 @@
 name: Get dates
 on:
   workflow_call:
+    inputs:
+      isMonth:
+        required: false
+        type: boolean
+      isToday:
+        required: false
+        type: boolean
+      isYesterday:
+        required: false
+        type: boolean
     outputs:
       month:
         description: "Get this month's dates"
         value: ${{ jobs.get-month.outputs.month }}
+      today:
+        description: "Get this today's dates"
+        value: ${{ jobs.get-today.outputs.today }}
+      yesterday:
+        description: "Get this yesterday's dates"
+        value: ${{ jobs.get-yesterday.outputs.yesterday }}
 
 jobs:
   get-month:
-    runs-on: ubuntu-22.04
+    if: inputs.isMonth 
+    runs-on: ubuntu-24.04
     timeout-minutes: 1
     env:
-      NUMBER: ${{ inputs.number }}
       GH_TOKEN: ${{ secrets.token }}
       GH_REPO: ${{ secrets.repo }}
     outputs:
-      month: ${{ steps.run-date-command.outputs.month }}
+      month: ${{ steps.run-date-command-for-m.outputs.month }}
     steps:
       - name: Get this month's dates
-        id: run-date-command
+        id: run-date-command-for-m
         run: |
           echo "month=`date +'%Y/%m'`" >> $GITHUB_OUTPUT
+        env:
+          TZ: 'Asia/Tokyo'
+  get-today:
+    if: inputs.isToday
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    outputs:
+      today: ${{ steps.run-date-command-for-t.outputs.today }}
+    steps:
+      - name: Get this today's dates
+        id: run-date-command-for-t
+        run: |
+          echo "today=`date +'%Y/%m/%d'`" >> $GITHUB_OUTPUT
+        env:
+          TZ: 'Asia/Tokyo'
+  get-yesterday:
+    if: inputs.isYesterday
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    outputs:
+      yesterday: ${{ steps.run-date-command-for-y.outputs.yesterday }}
+    steps:
+      - name: Get this yesterday's dates
+        id: run-date-command-for-y
+        run: |
+          echo "yesterday=`date -d 'yesterday' +'%Y/%m/%d'`" >> $GITHUB_OUTPUT
         env:
           TZ: 'Asia/Tokyo'
