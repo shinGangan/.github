@@ -1,0 +1,48 @@
+name: Lint using ESLint + reviewdog
+on:
+  workflow_call:
+    inputs:
+      node-version-file:
+        required: false
+        type: string
+        default: 'package.json'
+      workdir:
+        required: true
+        type: string
+    secrets:
+      token:
+        description: "Github token"
+        required: true
+      repo:
+        description: "Github repository"
+        required: true
+
+jobs:
+  lint-using-eslint:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    # permissions:
+    #   contents: read
+    #   pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      # Note: pnpm v10で不要になるらしい
+      - run: corepack enable
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ${{ inputs.node-version-file }}
+          cache: 'pnpm'
+      # Note: pnpm 採用が多いためpnpmで固定している.
+      #       pnpm 以外の利用が増えた場合は npym の採用を視野に入れる
+      - name: Run pnpm installation
+        run: pnpm i --frozen-lockfile
+      - uses: reviewdog/action-setup@v1
+        with:
+          reviewdog_version: latest
+      - name: Run reviewdog with eslint
+        uses: reviewdog/action-eslint@v1
+        with:
+          github_token: ${{ secrets.token }}
+          filter_mode: diff_context
+          fail_level: error
+          workdir: ${{ inputs.workdir }}
