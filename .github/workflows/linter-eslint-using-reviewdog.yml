@@ -3,7 +3,6 @@ on:
   workflow_call:
     inputs:
       node-version-file:
-        description: "Nodepackage.json"
         required: true
         type: string
         default: 'package.json'
