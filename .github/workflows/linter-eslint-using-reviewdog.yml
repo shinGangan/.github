@@ -3,7 +3,7 @@ on:
   workflow_call:
     inputs:
       node-version-file:
-        required: true
+        required: false
         type: string
         default: 'package.json'
       workdir:
