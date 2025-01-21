@@ -33,7 +33,7 @@ jobs:
           node-version-file: ${{ inputs.node-version-file }}
           cache: 'pnpm'
       # Note: pnpm 採用が多いためpnpmで固定している.
-      #       npm/yarn/pnpmを
+      #       pnpm 以外の利用が増えた場合は npym の採用を視野に入れる
       - name: Run pnpm installation
         run: pnpm i --frozen-lockfile
       - uses: reviewdog/action-setup@v1
