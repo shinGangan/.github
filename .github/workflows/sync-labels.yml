@@ -2,6 +2,15 @@ name: Sync labels
 
 on:
   workflow_dispatch:
+    inputs:
+      prune:
+        required: false
+        type: boolean
+        default: false
+      target:
+        required: false
+        type: string
+        default: '.github/labels.yml'
   push:
     branches:
       - main
@@ -18,5 +27,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          manifest: labels.yml
-          prune: false
+          manifest: ${{ inputs.target }}
+          prune: ${{ inputs.prune }}
