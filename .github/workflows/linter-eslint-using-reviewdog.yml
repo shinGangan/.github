@@ -26,16 +26,12 @@ jobs:
     #   pull-requests: write
     steps:
       - uses: actions/checkout@v4
-      # Note: pnpm v10で不要になるらしい
-      - run: corepack enable
-      - uses: actions/setup-node@v4
+      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+      - uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
           node-version-file: ${{ inputs.node-version-file }}
           cache: 'pnpm'
-      # Note: pnpm 採用が多いためpnpmで固定している.
-      #       pnpm 以外の利用が増えた場合は npym の採用を視野に入れる
-      - name: Run pnpm installation
-        run: pnpm i --frozen-lockfile
+      - run: pnpm i --frozen-lockfile
       - uses: reviewdog/action-setup@v1
         with:
           reviewdog_version: latest
