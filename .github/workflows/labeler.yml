@@ -19,7 +19,7 @@ jobs:
       LABELS: ${{ steps.labeler.outputs.all-labels }}
     steps:
       - id: labeler
-        uses: actions/labeler@v5
+        uses: actions/labeler@v6
         with:
           repo-token: ${{ secrets.token }}
           configuration-path: ${{ inputs.config-path }}
