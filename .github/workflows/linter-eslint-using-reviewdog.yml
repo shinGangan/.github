@@ -25,18 +25,19 @@ jobs:
     #   contents: read
     #   pull-requests: write
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           node-version-file: ${{ inputs.node-version-file }}
           cache: 'pnpm'
       - run: pnpm i --frozen-lockfile
-      - uses: reviewdog/action-setup@v1
+      - uses: reviewdog/action-setup@d8edfce3dd5e1ec6978745e801f9c50b5ef80252 # v1.4.0
         with:
-          reviewdog_version: latest
+          # ref: https://github.com/reviewdog/reviewdog/releases
+          reviewdog_version: v0.21.0
       - name: Run reviewdog with eslint
-        uses: reviewdog/action-eslint@v1
+        uses: reviewdog/action-eslint@556a3fdaf8b4201d4d74d406013386aa4f7dab96 # v1.34.0
         with:
           github_token: ${{ secrets.token }}
           filter_mode: diff_context
