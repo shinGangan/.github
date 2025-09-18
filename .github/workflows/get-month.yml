@@ -27,9 +27,6 @@ jobs:
     if: inputs.isMonth 
     runs-on: ubuntu-24.04
     timeout-minutes: 1
-    env:
-      GH_TOKEN: ${{ secrets.token }}
-      GH_REPO: ${{ secrets.repo }}
     outputs:
       month: ${{ steps.run-date-command-for-m.outputs.month }}
     steps:
