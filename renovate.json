@@ -1,5 +1,5 @@
 {
-  // ref: https://github.com/shinGangan/renovate-config
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["github>shinGangan/renovate-config"],
   "reviewers": ["shinGangan"]
 }
