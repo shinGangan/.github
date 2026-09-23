@@ -35,7 +35,7 @@ jobs:
       - uses: reviewdog/action-setup@d8a7baabd7f3e8544ee4dbde3ee41d0011c3a93f # v1.5.0
         with:
           # ref: https://github.com/reviewdog/reviewdog/releases
-          reviewdog_version: v0.21.0
+          reviewdog_version: v0.21.2
       - name: Run reviewdog with eslint
         uses: reviewdog/action-eslint@556a3fdaf8b4201d4d74d406013386aa4f7dab96 # v1.34.0
         with:
